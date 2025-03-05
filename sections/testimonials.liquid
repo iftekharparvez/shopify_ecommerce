@@ -1,0 +1,63 @@
+<section class="max-w-[1240px] mx-auto py-12 pb-[160px]">
+    <div class="flex items-center justify-between mt-6 px-6 md:px-0">
+        <h2 class="text-5xl font-extrabold text-black">{{ section.settings.section_title }}</h2>
+        <div class="flex space-x-4 text-2xl text-black">
+            <span class="cursor-pointer slick-custom-prev">←</span>
+            <span class="cursor-pointer slick-custom-next">→</span>
+        </div>
+    </div>
+
+    <div class="slider mt-8 mb-24 md:mb-0 px-6 md:px-0">
+        {% for block in section.blocks %}
+            <div class="bg-white p-6 rounded-xl border min-h-[233px]">
+                <div class="flex items-center space-x-2">
+                    <span class="text-yellow-400 text-xl"><img src="{{ 'star.png' | asset_url }}" alt="Review Stars"></span>
+                </div>
+                <p class="font-bold mt-2 flex items-center">{{ block.settings.customer_name }} 
+                    <span class="text-green-500 ml-2"><img src="{{ 'right.png' | asset_url }}" alt="Verified" class="w-4 h-4 inline-block"></span>
+                </p>
+                <p class="text-gray-600 mt-2">"{{ block.settings.customer_review }}"</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "Customer Reviews",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "OUR HAPPY CUSTOMERS"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "text",
+          "id": "customer_name",
+          "label": "Customer Name",
+          "default": "John Doe"
+        },
+        {
+          "type": "textarea",
+          "id": "customer_review",
+          "label": "Customer Review",
+          "default": "This is the best shopping experience I've ever had! Highly recommended."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Customer Reviews",
+      "category": "Testimonials"
+    }
+  ]
+}
+{% endschema %}

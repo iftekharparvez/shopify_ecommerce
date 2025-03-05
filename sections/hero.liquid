@@ -1,0 +1,124 @@
+<section class="hero-section bg-[#F2F0F1] z-10">
+    <div class="max-w-[1240px] mx-auto px-6 md:px-0">
+        <!-- Hero Section -->
+        <div class="flex flex-col md:flex-row items-center justify-between relative">
+            <div class="w-full md:w-1/2 text-center md:text-left">
+                <h1 class="text-4xl md:text-5xl leading-loose font-extrabold text-black leading-tight">
+                    {{ section.settings.hero_title | escape | newline_to_br }}
+                </h1>
+                <p class="text-gray-600 mt-4 pr-10 text-sm md:text-base">
+                    {{ section.settings.hero_subtitle }}
+                </p>
+                <a href="{{ section.settings.button_link }}" class="mt-6 px-8 py-3 bg-black text-white font-semi rounded-3xl hover:bg-gray-800 transition duration-300">
+                    {{ section.settings.button_text }}
+                </a>
+                
+                <div class="flex flex-col sm:flex-row mt-10 space-y-6 sm:space-y-0 sm:space-x-10 font-semibold">
+                    <div class="border-b sm:border-r sm:border-b-0 border-gray-400 pb-4 sm:pb-0 pr-0 sm:pr-6">
+                        <span class="text-black text-2xl">{{ section.settings.stat_1_value }}</span>
+                        <p class="text-gray-600 text-sm font-thin">{{ section.settings.stat_1_label }}</p>
+                    </div>
+                    <div class="border-b sm:border-r sm:border-b-0 border-gray-400 pb-4 sm:pb-0 pr-0 sm:pr-6">
+                        <span class="text-black text-2xl">{{ section.settings.stat_2_value }}</span>
+                        <p class="text-gray-600 text-sm font-thin">{{ section.settings.stat_2_label }}</p>
+                    </div>
+                    <div class="">
+                        <span class="text-black text-2xl">{{ section.settings.stat_3_value }}</span>
+                        <p class="text-gray-600 text-sm font-thin">{{ section.settings.stat_3_label }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Image -->
+            <div class="w-full md:w-1/2 flex justify-center md:justify-end relative mt-6 md:mt-0">
+                <img src="{{ 'hero-bg.png' | asset_url }}" 
+                     alt="Hero Image" class="w-4/5 md:w-full">
+            </div>
+            
+            <!-- Decorative Stars -->
+            <img src="{{ 'v1.png' | asset_url }}" alt="Star" 
+                 class="absolute top-[50%] md:top-[43%] left-[45%] md:left-[50%] w-8 md:w-10">
+            <img src="{{ 'v2.png' | asset_url }}" alt="Star" 
+                 class="absolute top-[12%] md:top-[17%] right-[6%] w-12 md:w-16">
+        </div>        
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Hero Title",
+      "default": "FIND CLOTHES\nTHAT MATCHES\nYOUR STYLE"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_subtitle",
+      "label": "Hero Subtitle",
+      "default": "Browse through our diverse range of meticulously crafted garments, designed to bring out your individuality and cater to your sense of style."
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link",
+      "default": "/collections/all"
+    },
+    {
+      "type": "text",
+      "id": "stat_1_value",
+      "label": "Stat 1 Value",
+      "default": "200+"
+    },
+    {
+      "type": "text",
+      "id": "stat_1_label",
+      "label": "Stat 1 Label",
+      "default": "International Brands"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_value",
+      "label": "Stat 2 Value",
+      "default": "2,000+"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_label",
+      "label": "Stat 2 Label",
+      "default": "High-Quality Products"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_value",
+      "label": "Stat 3 Value",
+      "default": "30,000+"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_label",
+      "label": "Stat 3 Label",
+      "default": "Happy Customers"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Section",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}

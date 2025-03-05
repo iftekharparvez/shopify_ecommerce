@@ -1,0 +1,62 @@
+<section class="max-w-[1240px] mx-auto py-12 px-6 md:px-0 border-t">
+    <h2 class="text-center text-5xl pb-6 font-extrabold uppercase">
+        {{ section.settings.section_title }}
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
+        {% for product in collections[section.settings.collection].products limit: 4 %}
+            <div>
+                <a href="{{ product.url }}">
+                    <img src="{{ product.featured_image | image_url: width: 500 }}"
+                         alt="{{ product.title }}" 
+                         class="rounded-xl h-[300px] w-full object-cover">
+                </a>
+                <p class="mt-4 font-semibold">{{ product.title }}</p>
+                <div class="text-black flex items-center space-x-2">
+                    <img src="{{ 'review1.png' | asset_url }}" alt="Review">
+                    <span>4.5/5</span> 
+                    <!-- You can integrate real product reviews dynamically using an app -->
+                </div>
+                <p class="text-lg font-bold mt-2">
+                    {{ product.price | money }}
+                    {% if product.compare_at_price > product.price %}
+                        <span class="text-gray-400 line-through">{{ product.compare_at_price | money }}</span>
+                        <span class="text-[#FF3333] text-xs rounded-2xl bg-[#FF33331A] px-2 py-1">
+                            -{{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price | round }}%
+                        </span>
+                    {% endif %}
+                </p>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="text-center mt-8">
+        <a href="{{ collections[section.settings.collection].url }}"
+           class="px-[70px] py-[12px] border border-gray-300 rounded-full hover:bg-black hover:text-white transition">
+            View All
+        </a>
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "Top Selling Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "TOP SELLING"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Select Collection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Top Selling",
+      "category": "Collection"
+    }
+  ]
+}
+{% endschema %}

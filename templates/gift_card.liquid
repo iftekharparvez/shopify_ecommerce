@@ -1,0 +1,34 @@
+<section class="gift-card">
+    <div class="gift-card-container">
+        <!-- Gift Card Image -->
+        {% if gift_card.image %}
+            <img src="{{ gift_card.image | img_url: 'large' }}" alt="Gift Card">
+        {% else %}
+            <img src="{{ 'gift-card-placeholder.png' | asset_url }}" alt="Gift Card">
+        {% endif %}
+
+        <!-- Gift Card Details -->
+        <div class="gift-card-details">
+            <h1>{{ 'gift_card.issued' | t }}</h1>
+            <p class="balance">{{ 'gift_card.remaining_balance' | t }}: {{ gift_card.balance | money }}</p>
+
+            <!-- Gift Card Code -->
+            <div class="gift-card-code">
+                <strong>{{ gift_card.code | format_code }}</strong>
+                <button onclick="copyGiftCardCode()">Copy Code</button>
+            </div>
+
+            <!-- Expiry Date -->
+            {% if gift_card.expires_on %}
+                <p class="expiry-date">
+                    {{ 'gift_card.expiry' | t }}: {{ gift_card.expires_on | date: "%B %d, %Y" }}
+                </p>
+            {% endif %}
+
+            <!-- Redemption Instructions -->
+            <p class="instructions">
+                {{ 'gift_card.redeem_instructions' | t }}
+            </p>
+        </div>
+    </div>
+</section>

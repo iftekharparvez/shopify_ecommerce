@@ -1,0 +1,76 @@
+[
+    {
+      "name": "General Settings",
+      "settings": [
+        {
+          "type": "text",
+          "id": "store_name",
+          "label": "Store Name",
+          "default": "My Shopify Store"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo"
+        }
+      ]
+    },
+    {
+      "name": "Colors",
+      "settings": [
+        {
+          "type": "color",
+          "id": "primary_color",
+          "label": "Primary Color",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "secondary_color",
+          "label": "Secondary Color",
+          "default": "#ffffff"
+        }
+      ]
+    },
+    {
+      "name": "Typography",
+      "settings": [
+        {
+          "type": "font_picker",
+          "id": "heading_font",
+          "label": "Heading Font",
+          "default": "sans-serif"
+        },
+        {
+          "type": "font_picker",
+          "id": "body_font",
+          "label": "Body Font",
+          "default": "sans-serif"
+        }
+      ]
+    },
+    {
+      "name": "Social Media",
+      "settings": [
+        {
+          "type": "text",
+          "id": "facebook_link",
+          "label": "Facebook URL",
+          "default": "https://facebook.com/"
+        },
+        {
+          "type": "text",
+          "id": "instagram_link",
+          "label": "Instagram URL",
+          "default": "https://instagram.com/"
+        },
+        {
+          "type": "text",
+          "id": "twitter_link",
+          "label": "Twitter URL",
+          "default": "https://twitter.com/"
+        }
+      ]
+    }
+  ]
+  

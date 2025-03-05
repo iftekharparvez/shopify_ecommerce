@@ -1,0 +1,107 @@
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "footer_text",
+      "label": "Footer Text",
+      "default": "Shop.co © 2000-2023, All Rights Reserved"
+    },
+    {
+      "type": "text",
+      "id": "facebook_url",
+      "label": "Facebook URL",
+      "default": "https://facebook.com/"
+    },
+    {
+      "type": "text",
+      "id": "twitter_url",
+      "label": "Twitter URL",
+      "default": "https://twitter.com/"
+    },
+    {
+      "type": "text",
+      "id": "instagram_url",
+      "label": "Instagram URL",
+      "default": "https://instagram.com/"
+    },
+    {
+      "type": "text",
+      "id": "github_url",
+      "label": "GitHub URL",
+      "default": "https://github.com/"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Footer Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link Text",
+          "default": "About Us"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer",
+      "blocks": [
+        {
+          "type": "link"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<footer class="bg-gray-100 pb-16 pt-12">
+  <div class="max-w-[1240px] mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 px-6">
+    
+    <!-- Footer Text -->
+    <div>
+      <h1 class="mb-4"><img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}"></h1>
+      <p class="text-gray-600">{{ settings.footer_text }}</p>
+    </div>
+
+    <!-- Footer Links -->
+    <div>
+      <h3 class="text-black mb-2">COMPANY</h3>
+      <ul class="text-gray-600 space-y-2">
+        {% for block in section.blocks %}
+          <li><a href="{{ block.settings.link_url }}">{{ block.settings.link_text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <!-- Social Media -->
+    <div>
+      <h3 class="text-black mb-2">FOLLOW US</h3>
+      <div class="flex space-x-4 mt-4">
+        <a href="{{ settings.facebook_url }}" target="_blank" class="w-8 h-8 flex items-center justify-center bg-white text-black rounded-full border">
+          <img src="{{ 'fb.png' | asset_url }}" alt="Facebook">
+        </a>
+        <a href="{{ settings.twitter_url }}" target="_blank" class="w-8 h-8 flex items-center justify-center bg-white text-black rounded-full border">
+          <img src="{{ 'twitter.png' | asset_url }}" alt="Twitter">
+        </a>
+        <a href="{{ settings.instagram_url }}" target="_blank" class="w-8 h-8 flex items-center justify-center bg-white text-black rounded-full border">
+          <img src="{{ 'instagram.png' | asset_url }}" alt="Instagram">
+        </a>
+        <a href="{{ settings.github_url }}" target="_blank" class="w-8 h-8 flex items-center justify-center bg-white text-black rounded-full border">
+          <img src="{{ 'github.png' | asset_url }}" alt="GitHub">
+        </a>
+      </div>
+    </div>
+
+  </div>
+</footer>
