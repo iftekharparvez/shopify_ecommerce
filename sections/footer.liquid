@@ -38,7 +38,7 @@
                           {% assign button_class = "bg-white text-black" %}
                       {% endif %}
                       
-                      <a href="#" class="w-8 h-8 flex items-center justify-center {{ button_class }} rounded-full border">
+                      <a href="#" class="w-8 h-8 flex items-center justify-center {{ button_class }} rounded-full border mr-1.5">
                           <img src="{{ platform | append: '.png' | asset_url }}" alt="{{ platform }}">
                       </a>
                   {% endfor %}
