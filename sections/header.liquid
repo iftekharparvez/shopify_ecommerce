@@ -2,21 +2,8 @@
   Shopify Header Section
 {% endcomment %}
 
-<header class="border-t">
-    <!-- Top Banner -->
-    {% if section.settings.show_banner %}
-        <div class="bg-black top-banner">
-            <div class="max-w-[1240px] mx-auto px-6 md:px-0">
-                <div class="text-white text-center py-2 text-xs sm:text-sm flex justify-between items-center">
-                    <p class="w-full">
-                        {{ section.settings.banner_text }} 
-                        <a href="{{ routes.account_register_url }}" class="underline">{{ section.settings.link_text }}</a>
-                    </p>
-                    <button class="text-white text-lg close-banner">&times;</button>
-                </div>
-            </div>
-        </div>
-    {% endif %}
+
+
 
     <!-- Header Section -->
     <div class="max-w-[1240px] mx-auto px-6 md:px-0 z-20 relative">
@@ -79,79 +66,53 @@
         </nav>
     </div>
 
-</header>
+
 
 {% schema %}
 {
-    "name": "Top Banner",
-    "settings": [
-        {
-            "type": "checkbox",
-            "id": "show_banner",
-            "label": "Show Banner",
-            "default": true
-        },
-        {
-            "type": "text",
-            "id": "banner_text",
-            "label": "Banner Text",
-            "default": "Sign up and get 20% off your first order."
-        },
-        {
-            "type": "text",
-            "id": "link_text",
-            "label": "Link Text",
-            "default": "Sign Up Now"
-        }
-    ],
-
-    "name": "Header",
-    "settings": [
-        {
-            "type": "image_picker",
-            "id": "logo",
-            "label": "Logo"
-        },
-        {
-            "type": "link_list",
-            "id": "menu",
-            "label": "Navigation Menu",
-            "default": "main-menu"
-        },
-        {
-            "type": "checkbox",
-            "id": "show_search",
-            "label": "Show Search Bar",
-            "default": true
-        },
-        {
-            "type": "text",
-            "id": "search_placeholder",
-            "label": "Search Placeholder Text",
-            "default": "Search for products..."
-        },
-        {
-            "type": "checkbox",
-            "id": "show_cart",
-            "label": "Show Cart Icon",
-            "default": true
-        },
-        {
-            "type": "checkbox",
-            "id": "show_login",
-            "label": "Show Login Icon",
-            "default": true
-        }
-    ],
-
-    "presets": [
-        {
-            "name": "Top Banner",
-            "name": "Header"
-        }
-    ]
+"name": "Header",
+"settings": [
+    {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+    },
+    {
+        "type": "link_list",
+        "id": "menu",
+        "label": "Navigation Menu",
+        "default": "main-menu"
+    },
+    {
+        "type": "checkbox",
+        "id": "show_search",
+        "label": "Show Search Bar",
+        "default": true
+    },
+    {
+        "type": "text",
+        "id": "search_placeholder",
+        "label": "Search Placeholder Text",
+        "default": "Search for products..."
+    },
+    {
+        "type": "checkbox",
+        "id": "show_cart",
+        "label": "Show Cart Icon",
+        "default": true
+    },
+    {
+        "type": "checkbox",
+        "id": "show_login",
+        "label": "Show Login Icon",
+        "default": true
+    }
+],
+"presets": [
+    {
+        "name": "Header"
+    }
+]
 }
-
-
 {% endschema %}
-
+    
