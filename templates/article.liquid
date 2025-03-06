@@ -1,0 +1,64 @@
+<div class="max-w-[1240px] mx-auto py-6 pb-24 border-t border-gray-200">
+    <!-- Blog Title -->
+    <h1 class="text-4xl font-bold text-center mb-4">{{ article.title }}</h1>
+
+    <!-- Author & Date -->
+    <p class="text-gray-500 text-center mb-6">
+        Posted on {{ article.published_at | date: "%B %d, %Y" }} by {{ article.author }}
+    </p>
+
+    <!-- Featured Image -->
+    {% if article.image %}
+        <img src="{{ article.image | img_url: '1000x600' }}" alt="{{ article.title }}" class="w-full rounded-lg mb-6">
+    {% endif %}
+
+    <!-- Blog Content -->
+    <div class="prose prose-lg max-w-none text-gray-800 leading-relaxed">
+        {{ article.content }}
+    </div>
+
+    <!-- Tags -->
+    {% if article.tags.size > 0 %}
+        <div class="mt-6 flex flex-wrap gap-2">
+            {% for tag in article.tags %}
+                <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm">{{ tag }}</span>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Social Share Buttons (Static Example, Can Be Replaced with Apps) -->
+    <div class="mt-8 flex items-center gap-4">
+        <span class="font-semibold">Share:</span>
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url }}{{ article.url }}" target="_blank" class="text-blue-600 hover:underline">Facebook</a>
+        <a href="https://twitter.com/intent/tweet?text={{ article.title }}&url={{ shop.url }}{{ article.url }}" target="_blank" class="text-blue-400 hover:underline">Twitter</a>
+    </div>
+
+    <!-- Related Blog Posts -->
+    {% if blog.articles.size > 1 %}
+        <div class="mt-12">
+            <h2 class="text-2xl font-bold mb-4">Related Posts</h2>
+            <div class="flex flex-wrap gap-6">
+                {% for related_article in blog.articles limit: 3 %}
+                    {% if related_article.id != article.id %}
+                        <div class="w-full sm:w-[48%] md:w-[31%] bg-white p-4 rounded-lg shadow-sm">
+                            {% if related_article.image %}
+                                <a href="{{ related_article.url }}">
+                                    <img src="{{ related_article.image | img_url: '600x400' }}" alt="{{ related_article.title }}" class="w-full h-40 object-cover rounded-lg">
+                                </a>
+                            {% endif %}
+                            <h3 class="mt-3 font-semibold text-lg">
+                                <a href="{{ related_article.url }}" class="hover:underline">{{ related_article.title }}</a>
+                            </h3>
+                            <p class="text-gray-500 text-sm mt-1">
+                                {{ related_article.published_at | date: "%B %d, %Y" }}
+                            </p>
+                            <a href="{{ related_article.url }}" class="mt-3 inline-block text-blue-600 font-medium hover:underline">
+                                Read More →
+                            </a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+</div>
