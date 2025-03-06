@@ -1,43 +1,83 @@
-<!-- New Arrivals Section -->
 <section class="max-w-[1240px] mx-auto py-12 px-6 md:px-0">
-    <h2 class="text-center text-5xl pb-6 font-extrabold">NEW ARRIVALS</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
-        <!-- Product 1 -->
+    <!-- Section Title (Dynamic) -->
+    <h2 class="text-center text-5xl pb-6 font-extrabold">
+        {{ section.settings.title }}
+    </h2>
 
-        
-        {% for product in collections.all.products limit: 4 %}
-            {% assign image_name = 'p' | append: forloop.index | append: '.png' %}
+    <!-- Product Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
+        {% for product in collections[section.settings.collection].products limit: section.settings.product_limit %}
             <div>
                 <!-- Product Image -->
                 <a href="{{ product.url }}">
                     <img src="{{ product.featured_image | img_url: '400x400' }}" alt="{{ product.title }}" class="rounded-xl h-[300px] w-full object-cover">
                 </a>
-            
+
                 <!-- Product Title -->
                 <p class="mt-4 font-semibold">
                     <a href="{{ product.url }}" class="hover:underline">{{ product.title }}</a>
                 </p>
-            
+
                 <!-- Star Rating (Static for now, can integrate with a reviews app) -->
                 <div class="text-black flex items-center space-x-2">
                     <img src="{{ 'review1.png' | asset_url }}" alt="Star Rating">
                     <span>4.5/5</span>
                 </div>
-            
+
                 <!-- Price -->
                 <p class="text-lg font-bold mt-2">
                     {{ product.price | money }}
                 </p>
             </div>
-            
         {% endfor %}
-        
-
-        
     </div>
+
+    <!-- View All Button -->
     <div class="text-center mt-8">
-        <button class="px-[70px] py-[12px] border border-gray-300 rounded-full hover:bg-black hover:text-white transition">View All</button>
+        <a href="{{ collections[section.settings.collection].url }}" class="px-[70px] py-[12px] border border-gray-300 rounded-full hover:bg-black hover:text-white transition">
+            {{ section.settings.button_text }}
+        </a>
     </div>
 </section>
+
+{% schema %}
+{
+    "name": "New Arrivals",
+    "settings": [
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Section Title",
+            "default": "NEW ARRIVALS"
+        },
+        {
+            "type": "collection",
+            "id": "collection",
+            "label": "Select Collection"
+        },
+        {
+            "type": "range",
+            "id": "product_limit",
+            "label": "Number of Products to Show",
+            "min": 1,
+            "max": 12,
+            "step": 1,
+            "default": 4
+        },
+        {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button Text",
+            "default": "View All"
+        }
+    ],
+    "presets": [
+        {
+            "name": "New Arrivals",
+            "category": "Collections"
+        }
+    ]
+}
+{% endschema %}
 
 
