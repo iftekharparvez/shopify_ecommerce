@@ -20,7 +20,7 @@
     "arrivals": {
       "type": "arrivals",
       "settings": {
-        "title": "NEW ARRIVALS",
+        "title": "NEW ARRIVAL",
         "collection": "winter-collection",
         "product_limit": 4,
         "button_text": "View All"
