@@ -19,7 +19,12 @@
     },
     "arrivals": {
       "type": "arrivals",
-      "settings": {}
+      "settings": {
+        "title": "NEW ARRIVALS",
+        "collection": "winter-collection",
+        "product_limit": 4,
+        "button_text": "View All"
+      }
     },
     "selling": {
       "type": "selling",
