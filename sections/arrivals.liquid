@@ -8,14 +8,28 @@
         {% for product in collections.all.products limit: 4 %}
             {% assign image_name = 'p' | append: forloop.index | append: '.png' %}
             <div>
-                <img src="{{ image_name | asset_url }}" alt="T-shirt" class="rounded-xl h-[300px] w-full object-cover">
-                <p class="mt-4 font-semibold">T-shirt with Tape Details</p>
+                <!-- Product Image -->
+                <a href="{{ product.url }}">
+                    <img src="{{ product.featured_image | img_url: '400x400' }}" alt="{{ product.title }}" class="rounded-xl h-[300px] w-full object-cover">
+                </a>
+            
+                <!-- Product Title -->
+                <p class="mt-4 font-semibold">
+                    <a href="{{ product.url }}" class="hover:underline">{{ product.title }}</a>
+                </p>
+            
+                <!-- Star Rating (Static for now, can integrate with a reviews app) -->
                 <div class="text-black flex items-center space-x-2">
-                    <img src="{{ 'review1.png' | asset_url }}" alt="">
+                    <img src="{{ 'review1.png' | asset_url }}" alt="Star Rating">
                     <span>4.5/5</span>
                 </div>
-                <p class="text-lg font-bold mt-2">$120</p>
+            
+                <!-- Price -->
+                <p class="text-lg font-bold mt-2">
+                    {{ product.price | money }}
+                </p>
             </div>
+            
         {% endfor %}
         
 

@@ -1,0 +1,244 @@
+
+<div class="overflow-hidden">
+    <div class="max-w-[1240px] mx-auto py-6">
+        <div class="border-t border-gray-200 mb-24 pt-10">
+            <div class="flex text-gray-500 text-sm mb-6 ">
+                <a href="{{ routes.root_url }}" class="hover:text-gray-700">Home</a>
+                <span class="mx-2 text-gray-400">›</span>
+                <span class="text-black font-medium">{{ product.title }}</span>
+            </div>  
+
+            <div class="max-w-6xl mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- Left: Product Image Gallery -->
+                <div class="flex gap-4">
+                    <!-- Thumbnails -->
+                    <div class="flex flex-col gap-4">
+                        {% for image in product.images %}
+                            <img src="{{ image.src | img_url: '100x100' }}" alt="{{ product.title }}" class="w-16 h-16 rounded-lg border cursor-pointer">
+                        {% endfor %}
+                    </div>
+                    <!-- Main Image -->
+                    <div class="flex-1">
+                        <img src="{{ product.featured_image | img_url: 'large' }}" alt="{{ product.title }}" class="w-full rounded-lg">
+                    </div>
+                </div>
+            
+                <!-- Right: Product Information -->
+                <div>
+                    <h1 class="text-3xl font-bold">{{ product.title }}</h1>
+            
+                    <!-- Ratings -->
+                    <div class="flex items-center gap-2 mt-2">
+                        <div class="flex text-yellow-400 text-lg">
+                            ★★★★☆
+                        </div>
+                        <span class="text-gray-500 text-sm">4.5/5</span>
+                    </div>
+            
+                    <!-- Price and Discount -->
+                    <div class="flex items-center gap-2 mt-3">
+                        <span class="text-2xl font-semibold">{{ product.price | money }}</span>
+                        {% if product.compare_at_price > product.price %}
+                            <span class="text-gray-400 line-through text-lg">{{ product.compare_at_price | money }}</span>
+                            <span class="text-red-500 text-sm font-medium bg-red-100 px-2 py-1 rounded">
+                                -{{ product.price | times: 100.0 | divided_by: product.compare_at_price | minus: 100 | abs }}%
+                            </span>
+                        {% endif %}
+                    </div>
+            
+                    <!-- Description -->
+                    <p class="text-gray-600 mt-3">
+                        {{ product.description }}
+                    </p>
+            
+                    <!-- Color Options -->
+                    {% assign color_option_index = product.options_by_name['Color'] %}
+                    {% if color_option_index %}
+                        <div class="mt-4">
+                            <h4 class="text-md font-medium">Select Colors</h4>
+                            <div class="flex gap-2 mt-2">
+                                {% for variant in product.variants %}
+                                    <button class="w-8 h-8 rounded-full border {% if variant == product.selected_or_first_available_variant %}border-black{% endif %}" 
+                                        style="background-color: {{ variant.option1 | handleize }};">
+                                    </button>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+            
+                    <!-- Size Options -->
+                    {% assign size_option_index = product.options_by_name['Size'] %}
+                    {% if size_option_index %}
+                        <div class="mt-4">
+                            <h4 class="text-md font-medium">Choose Size</h4>
+                            <div class="flex gap-3 mt-2">
+                                {% for option in size_option_index.values %}
+                                    <button class="px-4 py-2 border rounded-lg text-sm {% if option == product.selected_or_first_available_variant.option2 %}bg-black text-white{% endif %}">
+                                        {{ option }}
+                                    </button>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+            
+                    <!-- Quantity & Add to Cart -->
+                    <form method="post" action="/cart/add">
+                        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+                        <div class="mt-6 flex items-center gap-4">
+                            <div class="flex items-center border rounded-lg">
+                                <button type="button" class="px-4 py-2 text-lg" onclick="this.nextElementSibling.stepDown()">−</button>
+                                <input type="number" name="quantity" value="1" min="1" class="px-4 py-2 w-12 text-center">
+                                <button type="button" class="px-4 py-2 text-lg" onclick="this.previousElementSibling.stepUp()">+</button>
+                            </div>
+
+                            <button type="submit" class="px-6 py-3 bg-black text-white rounded-lg text-lg">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="mx-auto p-6">
+                <!-- Tabs -->
+                <div class="flex border-b text-gray-600 justify-center">
+                    <button class="px-6 py-3 border-b-2 border-black font-semibold text-black tab-btn" data-tab="details">Product Details</button>
+                    <button class="px-6 py-3 border-b-2 border-transparent hover:text-black tab-btn" data-tab="reviews">Rating & Reviews</button>
+                    <button class="px-6 py-3 border-b-2 border-transparent hover:text-black tab-btn" data-tab="faqs">FAQs</button>
+                </div>
+            
+                <!-- Product Details Tab -->
+                <div class="tab-content mt-6" id="details">
+                    <h2 class="text-2xl font-bold">Product Details</h2>
+                    <p class="text-gray-600 mt-3">Here goes the detailed description of the product...</p>
+                </div>
+            
+                <!-- Rating & Reviews Tab -->
+                <div class="tab-content mt-6 hidden" id="reviews">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-2xl font-bold">All Reviews <span class="text-gray-500">(451)</span></h2>
+                        <div class="flex items-center gap-3">
+                            <button class="flex items-center gap-2 px-4 py-2 border rounded-lg text-sm">
+                                <span>Latest</span> ▼
+                            </button>
+                            <button class="px-4 py-2 bg-black text-white rounded-lg text-sm">Write a Review</button>
+                        </div>
+                    </div>
+            
+                    <!-- Reviews Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                        <!-- Review Card -->
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <div class="flex items-center gap-2">
+                                <div class="text-yellow-400 text-lg">★★★★★</div>
+                                <span class="text-sm font-semibold">Samantha D.</span>
+                                <span class="text-green-500">✔</span>
+                            </div>
+                            <p class="text-gray-600 mt-2">
+                                "I absolutely love this t-shirt! The design is unique and the fabric feels so comfortable..."
+                            </p>
+                            <p class="text-gray-400 text-sm mt-3">Posted on August 14, 2023</p>
+                        </div>
+            
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <div class="flex items-center gap-2">
+                                <div class="text-yellow-400 text-lg">★★★★★</div>
+                                <span class="text-sm font-semibold">Alex M.</span>
+                                <span class="text-green-500">✔</span>
+                            </div>
+                            <p class="text-gray-600 mt-2">
+                                "The t-shirt exceeded my expectations! The colors are vibrant..."
+                            </p>
+                            <p class="text-gray-400 text-sm mt-3">Posted on August 15, 2023</p>
+                        </div>
+            
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <div class="flex items-center gap-2">
+                                <div class="text-yellow-400 text-lg">★★★★½</div>
+                                <span class="text-sm font-semibold">Ethan R.</span>
+                                <span class="text-green-500">✔</span>
+                            </div>
+                            <p class="text-gray-600 mt-2">
+                                "This t-shirt is a must-have for anyone who appreciates good design..."
+                            </p>
+                            <p class="text-gray-400 text-sm mt-3">Posted on August 16, 2023</p>
+                        </div>
+            
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <div class="flex items-center gap-2">
+                                <div class="text-yellow-400 text-lg">★★★★★</div>
+                                <span class="text-sm font-semibold">Olivia P.</span>
+                                <span class="text-green-500">✔</span>
+                            </div>
+                            <p class="text-gray-600 mt-2">
+                                "As a UI/UX enthusiast, I value simplicity and functionality..."
+                            </p>
+                            <p class="text-gray-400 text-sm mt-3">Posted on August 17, 2023</p>
+                        </div>
+                    </div>
+            
+                    <!-- Load More Reviews -->
+                    <div class="mt-6 text-center">
+                        <button class="px-6 py-3 border rounded-lg">Load More Reviews</button>
+                    </div>
+                </div>
+            
+                <!-- FAQs Tab -->
+                <div class="tab-content mt-6 hidden" id="faqs">
+                    <h2 class="text-2xl font-bold">FAQs</h2>
+                    <p class="text-gray-600 mt-3">Common questions and answers about the product...</p>
+                </div>
+            </div>
+
+            <div class="mx-auto">
+                <!-- Section Title -->
+                <h2 class="text-3xl font-bold text-center mb-8">YOU MIGHT ALSO LIKE</h2>
+            
+                <!-- Product Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                    <!-- Product Card 1 -->
+
+                    {% assign product_handles = '' %}
+
+                    <!-- Store all product handles in a single string -->
+                    {% for product in collections['seasional-collection'].products %}
+                        {% assign product_handles = product_handles | append: product.handle | append: ',' %}
+                    {% endfor %}
+                    
+                    <!-- Split and shuffle -->
+                    {% assign shuffled_products = product_handles | split: ',' | sort: random %}
+                    
+                    <!-- Display only 4 random products -->
+                    {% for handle in shuffled_products limit: 4 %}
+                        {% assign product = all_products[handle] %}
+                        <div>
+                            <!-- Product Image -->
+                            <a href="{{ product.url }}">
+                                <img src="{{ product.featured_image | img_url: '400x400' }}" alt="{{ product.title }}" class="rounded-xl h-[300px] w-full object-cover">
+                            </a>
+                    
+                            <!-- Product Title -->
+                            <p class="mt-4 font-semibold">
+                                <a href="{{ product.url }}" class="hover:underline">{{ product.title }}</a>
+                            </p>
+                    
+                            <!-- Star Rating (Static, can be integrated with a reviews app) -->
+                            <div class="text-black flex items-center space-x-2">
+                                <img src="{{ 'review1.png' | asset_url }}" alt="Star Rating">
+                                <span>4.5/5</span>
+                            </div>
+                    
+                            <!-- Price -->
+                            <p class="text-lg font-bold mt-2">
+                                {{ product.price | money }}
+                            </p>
+                        </div>
+                    {% endfor %}
+      
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

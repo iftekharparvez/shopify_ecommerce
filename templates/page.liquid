@@ -1,0 +1,22 @@
+{% comment %}
+  Page Template
+  - Displays individual pages in the Shopify theme.
+  - Uses theme.liquid as the main layout.
+{% endcomment %}
+
+
+<div class="overflow-hidden">
+    <div class="max-w-[1240px] mx-auto py-6">
+        <div class="border-t border-gray-200 mb-24 pt-10">
+            <div class="flex text-gray-500 text-sm mb-6 ">
+                <a href="{{ routes.root_url }}" class="hover:text-gray-700">Home</a>
+                <span class="mx-2 text-gray-400">›</span>
+                <span class="text-black font-medium">{{ page.title }}</span>
+            </div>   
+            <h1 class="font-bold text-4xl mb-6">Your {{ page.title }}</h1> 
+            <div class="">
+                {{ page.content }}
+            </div>       
+        </div>
+    </div>
+</div>
