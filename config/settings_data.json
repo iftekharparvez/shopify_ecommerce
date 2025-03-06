@@ -13,14 +13,25 @@
       "header": {
         "type": "header",
         "settings": {
-          "show_banner": true,
-          "banner_text": "Sign up and get 30% off your first order.",
-          "link_text": "Sign Up"
+          "logo": "shopify://shop_images/logo.png",
+          "menu": "main-menu",
+          "show_search": true,
+          "search_placeholder": "Search for products...",
+          "show_cart": true,
+          "show_login": true
         }
       },
       "footer": {
         "type": "footer",
         "settings": {}
+      },
+      "top-banner": {
+        "type": "top-banner",
+        "settings": {
+          "show_banner": true,
+          "banner_text": "Sign up and get 20% off your first order.",
+          "link_text": "Sign Up Now"
+        }
       }
     },
     "content_for_index": []
