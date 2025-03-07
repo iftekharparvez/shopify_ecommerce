@@ -1,35 +1,141 @@
 <section class="hero-section bg-[#F2F0F1] z-10">
-  <div class="max-w-[1240px] mx-auto px-6 md:px-0">
-      <!-- Hero Section -->
-      <div class="flex flex-col md:flex-row items-center justify-between relative">
-          <div class="w-full md:w-1/2 text-center md:text-left">
-              <h1 class="text-4xl md:text-5xl leading-loose font-extrabold text-black leading-tight">FIND CLOTHES<br>THAT MATCHES<br>YOUR STYLE</h1>
-              <p class="text-gray-600 mt-4 pr-10 text-sm md:text-base">Browse through our diverse range of meticulously crafted garments, designed to bring out your individuality and cater to your sense of style.</p>
-              <button class="mt-6 px-8 py-3 bg-black text-white font-semi rounded-3xl hover:bg-gray-800 transition duration-300 cursor-pointer">Shop Now</button>
-              <div class="flex flex-col sm:flex-row mt-10 space-y-6 sm:space-y-0 sm:space-x-10 font-semibold">
-                  <div class="border-b sm:border-r sm:border-b-0 border-gray-400 pb-4 sm:pb-0 pr-0 sm:pr-6 mr-4">
-                      <span class="text-black text-2xl">200+</span>
-                      <p class="text-gray-600 text-sm font-thin">International Brands</p>
-                  </div>
-                  <div class="border-b sm:border-r sm:border-b-0 border-gray-400 pb-4 sm:pb-0 pr-0 sm:pr-6 mr-4">
-                      <span class="text-black text-2xl">2,000+</span>
-                      <p class="text-gray-600 text-sm font-thin">High-Quality Products</p>
-                  </div>
-                  <div class="">
-                      <span class="text-black text-2xl">30,000+</span>
-                      <p class="text-gray-600 text-sm font-thin">Happy Customers</p>
-                  </div>
-              </div>
-          </div>
-          <div class="w-full md:w-1/2 flex justify-center md:justify-end relative mt-6 md:mt-0">
-               <img src="{{ 'hero-bg.png' | asset_url }}" alt="Person" class="w-4/5 md:w-full">
-          </div>
-          
-          <!-- Decorative Stars -->
-          <img src="{{ 'v1.png' | asset_url }}" alt="Star" class="hidden md:block absolute top-[50%] md:top-[43%] left-[45%] md:left-[50%] w-8 md:w-10">
-
-          <img src="{{ 'v2.png' | asset_url }}" alt="Star" class="hidden md:block absolute top-[12%] md:top-[17%] right-[6%] w-12 md:w-16">
-          
-      </div>        
-  </div>
-</section>
+    <div class="max-w-[1240px] mx-auto px-6 md:px-0">
+        <!-- Hero Section -->
+        <div class="flex flex-col md:flex-row items-center justify-between relative">
+            <div class="w-full md:w-1/2 text-center md:text-left">
+                <h1 class="text-4xl md:text-5xl leading-loose font-extrabold text-black leading-tight">
+                  {{ section.settings.hero_title }}
+                </h1>
+                <p class="text-gray-600 mt-4 pr-10 text-sm md:text-base">
+                  {{ section.settings.hero_subtitle }}
+                </p>
+                <a href="{{ section.settings.cta_link }}" class="mt-6 px-8 py-3 bg-black text-white font-semibold rounded-3xl hover:bg-gray-800 transition duration-300 cursor-pointer">
+                  {{ section.settings.cta_text }}
+                </a>
+  
+                <!-- Dynamic Statistics -->
+                <div class="flex flex-col sm:flex-row mt-10 space-y-6 sm:space-y-0 sm:space-x-10 font-semibold">
+                    {% for block in section.blocks %}
+                        <div {% unless forloop.last %} class="border-b sm:border-r sm:border-b-0 border-gray-400 pb-4 sm:pb-0 pr-0 sm:pr-6 mr-4" {% endunless %}>
+                            <span class="text-black text-2xl">{{ block.settings.stat_value }}</span>
+                            <p class="text-gray-600 text-sm font-thin">{{ block.settings.stat_label }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+  
+            <!-- Hero Image -->
+            <div class="w-full md:w-1/2 flex justify-center md:justify-end relative mt-6 md:mt-0">
+                 {% if section.settings.hero_image != blank %}
+                   <img src="{{ section.settings.hero_image | img_url: '500x' }}" alt="Hero Image" class="w-4/5 md:w-full">
+                 {% endif %}
+            </div>
+            
+            <!-- Decorative Stars -->
+            {% if section.settings.star_1 != blank %}
+              <img src="{{ section.settings.star_1 | img_url: '50x' }}" alt="Star" class="hidden md:block absolute top-[50%] md:top-[43%] left-[45%] md:left-[50%] w-8 md:w-10">
+            {% endif %}
+  
+            {% if section.settings.star_2 != blank %}
+              <img src="{{ section.settings.star_2 | img_url: '50x' }}" alt="Star" class="hidden md:block absolute top-[12%] md:top-[17%] right-[6%] w-12 md:w-16">
+            {% endif %}
+            
+        </div>        
+    </div>
+  </section>
+  
+  {% schema %}
+  {
+    "name": "Hero Section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "hero_title",
+        "label": "Hero Title",
+        "default": "FIND CLOTHES THAT MATCHES YOUR STYLE"
+      },
+      {
+        "type": "textarea",
+        "id": "hero_subtitle",
+        "label": "Hero Subtitle",
+        "default": "Browse through our diverse range of meticulously crafted garments, designed to bring out your individuality and cater to your sense of style."
+      },
+      {
+        "type": "text",
+        "id": "cta_text",
+        "label": "CTA Button Text",
+        "default": "Shop Now"
+      },
+      {
+        "type": "url",
+        "id": "cta_link",
+        "label": "CTA Button Link"
+      },
+      {
+        "type": "image_picker",
+        "id": "hero_image",
+        "label": "Hero Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "star_1",
+        "label": "Decorative Star 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "star_2",
+        "label": "Decorative Star 2"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "stat",
+        "name": "Statistic",
+        "settings": [
+          {
+            "type": "text",
+            "id": "stat_value",
+            "label": "Statistic Value",
+            "default": "200+"
+          },
+          {
+            "type": "text",
+            "id": "stat_label",
+            "label": "Statistic Label",
+            "default": "International Brands"
+          }
+        ]
+      }
+    ],
+    "max_blocks": 6,
+    "presets": [
+      {
+        "name": "Hero Section",
+        "blocks": [
+          {
+            "type": "stat",
+            "settings": {
+              "stat_value": "200+",
+              "stat_label": "International Brands"
+            }
+          },
+          {
+            "type": "stat",
+            "settings": {
+              "stat_value": "2,000+",
+              "stat_label": "High-Quality Products"
+            }
+          },
+          {
+            "type": "stat",
+            "settings": {
+              "stat_value": "30,000+",
+              "stat_label": "Happy Customers"
+            }
+          }
+        ]
+      }
+    ]
+  }
+  {% endschema %}
+  
