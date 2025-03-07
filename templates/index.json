@@ -11,7 +11,27 @@
   "sections": {
     "hero": {
       "type": "hero",
-      "settings": {}
+      "blocks": {
+        "stat_UKJnC4": {
+          "type": "stat",
+          "settings": {
+            "stat_value": "200+",
+            "stat_label": "International Brands"
+          }
+        }
+      },
+      "block_order": [
+        "stat_UKJnC4"
+      ],
+      "settings": {
+        "hero_title": "FIND CLOTHES THAT MATCHES YOUR STYLE",
+        "hero_subtitle": "Browse through our diverse range of meticulously crafted garments, designed to bring out your individuality and cater to your sense of style.",
+        "cta_text": "Shop Now",
+        "cta_link": "shopify://products/5-pocket-jean",
+        "hero_image": "shopify://shop_images/hero-bg.png",
+        "star_1": "shopify://shop_images/v2.png",
+        "star_2": "shopify://shop_images/v1.png"
+      }
     },
     "brand": {
       "type": "brand",
