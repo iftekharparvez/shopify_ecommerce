@@ -33,11 +33,14 @@
     </div>
 
     <!-- View All Button -->
+    {% if section.settings.show_button %}
     <div class="text-center mt-8">
         <a href="{{ collections[section.settings.collection].url }}" class="px-[70px] py-[12px] border border-gray-300 rounded-full hover:bg-black hover:text-white transition">
             {{ section.settings.button_text }}
         </a>
     </div>
+    {% endif %}
+
 </section>
 
 {% schema %}
@@ -69,6 +72,12 @@
             "max": 12,
             "step": 1,
             "default": 4
+        },
+        {
+            "type": "checkbox",
+            "id": "show_button",
+            "label": "Hide / Show Button",
+            "default": true
         },
         {
             "type": "text",
