@@ -6,7 +6,7 @@
                 <h1 class="text-4xl md:text-5xl leading-loose font-extrabold text-black leading-tight">
                   {{ section.settings.hero_title }}
                 </h1>
-                <p class="text-gray-600 mt-4 pr-10 pb-12 text-sm md:text-base">
+                <p class="text-gray-600 mt-4 pr-10 pb-8 text-sm md:text-base">
                   {{ section.settings.hero_subtitle }}
                 </p>
                 <a href="{{ section.settings.cta_link }}" class="mt-6 px-8 py-3 bg-black text-white font-semibold rounded-3xl hover:bg-gray-800 transition duration-300 cursor-pointer">
@@ -28,7 +28,9 @@
             <div class="w-full md:w-1/2 flex justify-center md:justify-end relative mt-6 md:mt-0">
                  {% if section.settings.hero_image != blank %}
                    <img src="{{ section.settings.hero_image | img_url: '500x' }}" alt="Hero Image" class="w-4/5 md:w-full">
-                 {% endif %}
+                {% else %}
+                    <img src="{{ 'hero-bg.png' | asset_url }}" alt="Hero Image" class="w-4/5 md:w-full">
+                {% endif %}
             </div>
             
             <!-- Decorative Stars -->
