@@ -21,6 +21,7 @@
       "type": "arrivals",
       "settings": {
         "title": "NEW ARRIVAL",
+        "grid_columns": 2,
         "collection": "winter-collection",
         "product_limit": 4,
         "button_text": "More Products"
