@@ -5,7 +5,7 @@
     </h2>
 
     <!-- Product Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-{{section.settings.grid_columns}} gap-6 mt-8">
         {% for product in collections[section.settings.collection].products limit: section.settings.product_limit %}
             <div>
                 <!-- Product Image -->
@@ -49,6 +49,13 @@
             "id": "title",
             "label": "Section Title",
             "default": "NEW ARRIVALS"
+        },
+        {
+            "type": "number",
+            "id": "grid_columns",
+            "label": "Number Of Columns",
+            "default": 4,
+            "info": "Enter a number between 2 and 4"
         },
         {
             "type": "collection",
