@@ -104,7 +104,13 @@
     },
     "selling": {
       "type": "selling",
-      "settings": {}
+      "settings": {
+        "title": "TOP SELLING",
+        "grid_columns": 4,
+        "collection": "seasional-collection",
+        "product_limit": 4,
+        "button_text": "More Products"
+      }
     },
     "dress": {
       "type": "dress",
