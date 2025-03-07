@@ -12,15 +12,31 @@
     "hero": {
       "type": "hero",
       "blocks": {
-        "stat_UKJnC4": {
+        "stat_aCfzAD": {
           "type": "stat",
           "settings": {
             "stat_value": "200+",
             "stat_label": "International Brands"
           }
+        },
+        "stat_CAcJiP": {
+          "type": "stat",
+          "settings": {
+            "stat_value": "2000+",
+            "stat_label": "Non Brands"
+          }
+        },
+        "stat_UKJnC4": {
+          "type": "stat",
+          "settings": {
+            "stat_value": "250+",
+            "stat_label": "Local Brands"
+          }
         }
       },
       "block_order": [
+        "stat_aCfzAD",
+        "stat_CAcJiP",
         "stat_UKJnC4"
       ],
       "settings": {
