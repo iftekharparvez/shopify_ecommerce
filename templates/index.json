@@ -20,8 +20,8 @@
     "arrivals": {
       "type": "arrivals",
       "settings": {
-        "title": "NEW ARRIVAL",
-        "grid_columns": 3,
+        "title": "NEW ARRIVALs",
+        "grid_columns": 4,
         "collection": "winter-collection",
         "product_limit": 4,
         "button_text": "More Products"
