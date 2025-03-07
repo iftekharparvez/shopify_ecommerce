@@ -15,6 +15,45 @@
     },
     "brand": {
       "type": "brand",
+      "blocks": {
+        "image_qCEdgw": {
+          "type": "image",
+          "settings": {
+            "brand_logo": "shopify://shop_images/brand2.png"
+          }
+        },
+        "image_g3EhJT": {
+          "type": "image",
+          "settings": {
+            "brand_logo": "shopify://shop_images/brand3.png"
+          }
+        },
+        "image_aTnPAX": {
+          "type": "image",
+          "settings": {
+            "brand_logo": "shopify://shop_images/brand5.png"
+          }
+        },
+        "image_WH77GC": {
+          "type": "image",
+          "settings": {
+            "brand_logo": "shopify://shop_images/brand2.png"
+          }
+        },
+        "image_zfnyAM": {
+          "type": "image",
+          "settings": {
+            "brand_logo": "shopify://shop_images/brand1.png"
+          }
+        }
+      },
+      "block_order": [
+        "image_qCEdgw",
+        "image_g3EhJT",
+        "image_aTnPAX",
+        "image_WH77GC",
+        "image_zfnyAM"
+      ],
       "settings": {}
     },
     "arrivals": {
