@@ -82,21 +82,22 @@
                     {% endif %}
             
                     <!-- Quantity & Add to Cart -->
-                    <form method="post" action="/cart/add">
+                    {% form 'product', product %}
                         <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
 
                         <div class="mt-6 flex items-center gap-4">
                             <div class="flex items-center border rounded-lg">
-                                <button type="button" class="px-4 py-2 text-lg" onclick="this.nextElementSibling.stepDown()">−</button>
-                                <input type="number" name="quantity" value="1" min="1" class="px-4 py-2 w-12 text-center">
-                                <button type="button" class="px-4 py-2 text-lg" onclick="this.previousElementSibling.stepUp()">+</button>
+                                <button type="button" name="quantity" class="px-4 py-2 text-lg" onclick="this.nextElementSibling.stepDown()">−</button>
+                                <input type="number" name="quantity" value="1" min="1" class="px-0 py-4 w-12 text-center">
+                                <button type="button" name="quantity" class="px-4 py-2 text-lg" onclick="this.previousElementSibling.stepUp()">+</button>
                             </div>
 
                             <button type="submit" class="px-6 py-3 bg-black text-white rounded-lg text-lg">
                                 Add to Cart
                             </button>
                         </div>
-                    </form>
+                    {% endform %}
+
                 </div>
             </div>
             
@@ -111,7 +112,7 @@
                 <!-- Product Details Tab -->
                 <div class="tab-content mt-6" id="details">
                     <h2 class="text-2xl font-bold">Product Details</h2>
-                    <p class="text-gray-600 mt-3">Here goes the detailed description of the product...</p>
+                    <p class="text-gray-600 mt-3">{{ product.description }}</p>
                 </div>
             
                 <!-- Rating & Reviews Tab -->

@@ -1,0 +1,98 @@
+<div class="overflow-hidden">
+    <div class="max-w-[1240px] mx-auto py-6">
+        <div class="border-t border-gray-200 mb-6 pt-10">
+            <div class="flex text-gray-500 text-sm mb-6 ">
+                <a href="{{ routes.root_url }}" class="hover:text-gray-700">Home</a>
+                <span class="mx-2 text-gray-400">›</span>
+                <span class="text-black font-medium">Cart</span>
+            </div>   
+            <h1 class="font-bold text-4xl mb-6">Your Cart</h1>    
+        </div>
+
+
+        {% if cart.item_count > 0 %}
+        <div class="grid grid-cols-3 gap-6 mb-24">
+            <!-- Cart Section -->
+            <div class="col-span-2 bg-white p-6 rounded-xl border border-gray-300">
+                <div class="divide-y">
+                    <!-- Cart Item -->
+
+                    {% for item in cart.items %}
+                    <div class="flex items-center gap-4 py-4">
+                        {% if item.image %}
+                        <img src="{{ item.image | image_url: width: 80 }}" alt="{{ item.product.title }}" class="w-20 h-20 rounded-lg">
+                        {% endif %}
+                        <div class="flex-1">
+                            <h2 class="font-semibold text-lg">{{ item.product.title }}</h2>
+                            <p class="text-gray-500 text-sm">Size: {{ item.variant.option1 }}</p>
+                            <p class="text-gray-500 text-sm">Color: {{ item.variant.option2 }}</p>
+                            <p class="font-semibold text-lg mt-1">{{ item.line_price | money_without_trailing_zeros }}</p>
+                        </div>
+
+                        <form method="post" action="{{ routes.cart_change_url }}">
+                            <div class="flex items-center">
+                                <button type="submit" name="quantity" value="{{ item.quantity | minus: 1 }}" class="px-3 py-1 border rounded-md">-</button>
+                                <span class="mx-2">{{ item.quantity }}</span>
+                                <button type="submit" name="quantity" value="{{ item.quantity | plus: 1 }}" class="px-3 py-1 border rounded-md">+</button>
+                            </div>
+                            <input type="hidden" name="id" value="{{ item.id }}">
+                        </form>
+
+                        <form method="post" action="{{ routes.cart_change_url }}">
+                            <input type="hidden" name="id" value="{{ item.id }}">
+                            <input type="hidden" name="quantity" value="0">
+                            <button type="submit" class="text-red-500 text-xl">🗑</button>
+                        </form>
+                    </div>
+                    {% endfor %}
+
+
+
+
+                </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="bg-white p-6 rounded-xl border border-gray-300">
+                <h2 class="font-semibold text-xl mb-4">Order Summary</h2>
+                <div class="text-gray-600">
+                    <div class="flex justify-between py-2">
+                        <span>Subtotal</span>
+                        <span class="font-semibold">{{ cart.total_price | money_without_trailing_zeros }}</span>
+                    </div>
+
+                    {% if cart.cart_level_discount_applications.size > 0 %}
+                        {% for discount in cart.cart_level_discount_applications %}
+                        <div class="flex justify-between py-2 text-red-500">
+                            <span>{{ discount.title }}</span>
+                            <span class="font-semibold">-{{ discount.total_allocated_amount | money_without_trailing_zeros }}</span>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <div class="flex justify-between py-2">
+                        <span>Delivery Fee</span>
+                        <span class="font-semibold">$15</span>
+                    </div>
+                    <hr class="my-4">
+                    <div class="flex justify-between py-2 text-lg font-semibold">
+                        <span>Total</span>
+                        <span>$467</span>
+                    </div>
+                    <div class="flex gap-2 mt-4">
+                        <input type="text" placeholder="Add promo code" class="flex-1 px-3 py-2 border rounded-md">
+                        <button class="bg-black text-white px-4 py-2 rounded-md">Apply</button>
+                    </div>
+                    <button class="mt-4 w-full bg-black text-white py-3 rounded-md flex justify-center items-center gap-2">
+                        Go to Checkout →
+                    </button>
+                </div>
+            </div>
+
+        </div>
+        {% else %}
+            <p class="text-gray-500 text-center text-lg">Your cart is empty. <a href="{{ routes.all_products_collection_url }}" class="text-black font-semibold">Shop now</a></p>
+        {% endif %}
+
+    </div>
+</div>
