@@ -58,40 +58,38 @@
                 <div class="text-gray-600">
                     <div class="flex justify-between py-2">
                         <span>Subtotal</span>
-                        <span class="font-semibold">{{ cart.total_price | money_without_trailing_zeros }}</span>
+                        <span class="font-semibold">{{ cart.items_subtotal_price | money }}</span>
                     </div>
 
-                    {% if cart.cart_level_discount_applications.size > 0 %}
-                        {% for discount in cart.cart_level_discount_applications %}
-                        <div class="flex justify-between py-2 text-red-500">
-                            <span>{{ discount.title }}</span>
-                            <span class="font-semibold">-{{ discount.total_allocated_amount | money_without_trailing_zeros }}</span>
-                        </div>
-                        {% endfor %}
-                    {% endif %}
+                    
+                    <div class="flex justify-between py-2 text-red-500">
+                        <span>Discount</span>
+                        <span class="font-semibold">{{ cart.total_discount | money }}</span>
+                    </div>
+                        
 
                     <div class="flex justify-between py-2">
                         <span>Delivery Fee</span>
-                        <span class="font-semibold">$15</span>
+                        <span class="font-semibold">{{ shipping_price | money }}</span>
                     </div>
                     <hr class="my-4">
                     <div class="flex justify-between py-2 text-lg font-semibold">
                         <span>Total</span>
-                        <span>$467</span>
+                        <span>{{ cart.total_price | money_without_trailing_zeros }}</span>
                     </div>
                     <div class="flex gap-2 mt-4">
                         <input type="text" placeholder="Add promo code" class="flex-1 px-3 py-2 border rounded-md">
                         <button class="bg-black text-white px-4 py-2 rounded-md">Apply</button>
                     </div>
-                    <button class="mt-4 w-full bg-black text-white py-3 rounded-md flex justify-center items-center gap-2">
+                    <a href="{{ routes.checkout_url }}" class="block mt-4 w-full bg-black text-white py-3 rounded-md text-center">
                         Go to Checkout →
-                    </button>
+                    </a>
                 </div>
             </div>
 
         </div>
         {% else %}
-            <p class="text-gray-500 text-center text-lg">Your cart is empty. <a href="{{ routes.all_products_collection_url }}" class="text-black font-semibold">Shop now</a></p>
+            <p class="text-gray-500 text-center text-lg pb-20">Your cart is empty. <a href="{{ routes.all_products_collection_url }}" class="text-black font-semibold">Shop now</a></p>
         {% endif %}
 
     </div>
