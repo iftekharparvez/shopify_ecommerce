@@ -81,9 +81,11 @@
                         <input type="text" placeholder="Add promo code" class="flex-1 px-3 py-2 border rounded-md">
                         <button class="bg-black text-white px-4 py-2 rounded-md">Apply</button>
                     </div>
-                    <a href="{{ routes.checkout_url }}" class="block mt-4 w-full bg-black text-white py-3 rounded-md text-center">
-                        Go to Checkout →
-                    </a>
+                    <form method="post" action="/checkout">
+                        <button type="submit" class="cursor-pointer block mt-4 w-full bg-black text-white py-3 rounded-md text-center">
+                            Go to Checkout →
+                        </button>
+                    </form>
                 </div>
             </div>
 
