@@ -17,6 +17,7 @@
                 <div class="divide-y">
                     <!-- Cart Item -->
 
+                  <form action="{{ routes.cart_url }}" method="post">
                     {% for item in cart.items %}
                     <div class="flex items-center gap-4 py-4">
                         {% if item.image %}
@@ -26,27 +27,19 @@
                             <h2 class="font-semibold text-lg">{{ item.product.title }}</h2>
                             <p class="text-gray-500 text-sm">Size: {{ item.variant.option1 }}</p>
                             <p class="text-gray-500 text-sm">Color: {{ item.variant.option2 }}</p>
-                            <p class="font-semibold text-lg mt-1">{{ item.line_price | money_without_trailing_zeros }}</p>
+                            <p class="font-semibold text-lg mt-1">{{ item.line_price | money }}</p>
                         </div>
 
-                        <form method="post" action="{{ routes.cart_change_url }}">
-                            <div class="flex items-center">
-                                <button type="submit" name="quantity" value="{{ item.quantity | minus: 1 }}" class="px-3 py-1 border rounded-md">-</button>
-                                <span class="mx-2">{{ item.quantity }}</span>
-                                <button type="submit" name="quantity" value="{{ item.quantity | plus: 1 }}" class="px-3 py-1 border rounded-md">+</button>
-                            </div>
-                            <input type="hidden" name="id" value="{{ item.id }}">
-                        </form>
 
-                        <form method="post" action="{{ routes.cart_change_url }}">
-                            <input type="hidden" name="id" value="{{ item.id }}">
-                            <input type="hidden" name="quantity" value="0">
-                            <button type="submit" class="text-red-500 text-xl">🗑</button>
-                        </form>
+                        {% render 'quantity', type:"cart", quantity:item.quantity, item_key:item.key %}
+
+                        
+
+                        <a class="text-red-500 text-xl cursor-pointer" href="{{item.url_to_remove}}">🗑</a>
                     </div>
                     {% endfor %}
 
-
+                  </form>  
 
 
                 </div>
@@ -96,3 +89,9 @@
 
     </div>
 </div>
+
+
+
+
+
+  

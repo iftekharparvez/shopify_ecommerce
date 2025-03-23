@@ -1,0 +1,45 @@
+<script>
+    jQuery(document).ready(function($) {
+        $(".minus").on("click", function() {
+            let quantity = parseInt($(this).siblings(".quantity").text());
+            if (quantity > 1) {
+                quantity--;
+                $(this).siblings(".quantity").text(quantity);
+                $(".quantity-hidden").val(quantity);
+            }
+        });
+    
+        $(".plus").on("click", function() {
+            let quantity = parseInt($(this).siblings(".quantity").text());
+            quantity++;
+            $(this).siblings(".quantity").text(quantity);
+
+            $(".quantity-hidden").val(quantity);
+
+
+            {% if type == "cart" %}
+        
+              $(this).closest("form").submit();
+             
+            {% endif %}
+        });
+    
+        
+    });
+    </script>
+    
+    
+    <div class="flex rounded-full items-center bg-gray-100 px-4">
+        <button type="button" class="px-2 py-1 text-lg cursor-pointer minus">-</button>
+        <span class="quantity px-6 text-center w-10">
+            {% if type == "cart" %}
+                {{ quantity }}
+            {% else %}
+                1
+            {% endif %}
+        </span>
+        <button type="button" class="px-2 py-1 text-lg cursor-pointer plus">+</button>
+    </div>
+    
+    <input name="{% if type == "cart" %}updates[{{ item_key }}]{% else %}quantity{% endif %}" type="hidden" min="1" value="1" class="w-24 bg-gray-100 text-center rounded-full mr-2 quantity-hidden">
+    
